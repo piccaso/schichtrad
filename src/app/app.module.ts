@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AddEventPage } from '../pages/add-event/add-event';
 import { EditEventPage } from '../pages/edit-event/edit-event';
+import {ShiftsService} from "../services/shifts.service";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { EditEventPage } from '../pages/edit-event/edit-event';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Calendar
+    Calendar,
+    ShiftsService
   ]
 })
 export class AppModule {}
