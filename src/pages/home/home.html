@@ -37,6 +37,7 @@
           <ng-template #otherDate class="otherDate">
             {{day}}<br>
             <div class="event-bullet" *ngIf="checkEvent(day)"></div>
+            <button style="height: 20px;">penis</button>
           </ng-template>
         </ion-col>
         <ion-col col-1 *ngFor="let nextDay of daysInNextMonth" class="next-month" (click)="goToNextMonth()">{{nextDay}}</ion-col>
