@@ -8,19 +8,24 @@ export class ShiftsService {
   constructor() {
   }
 
-  async calShift(toDate: Date): Promise<number> {
-    const diff = (toDate.getTime() - this.beginDate.getTime()) / (1000 * 60 * 60 * 24);
-    console.log('calulated Days form Past:', diff);
-    const shiftPosRef = await this.calShitsPosRef(this.shiftD, diff);
-    console.log('shift on day:', shiftPosRef);
-    return Promise.resolve(diff);
+  async calShift(toDate: Date, shift: any): Promise<any> {
+    const diff = this.getDaysFromDiff(toDate.getTime()) - this.getDaysFromDiff(this.beginDate.getTime());
+    console.log('calulated Days form Past :', diff);
+    const shiftRes = await this.calShitsPosRef(shift, diff);
+    console.log('shift on day:', shiftRes);
+    return Promise.resolve([diff, shiftRes]);
+  }
+
+  getDaysFromDiff(milis: number): number {
+    return Math.round(milis / (1000 * 60 * 60 * 24));
+
+
   }
 
   calShitsPosRef(shift, daysInPast) : Promise<string>{
     let shiftState;
 
-    for(let i = 0; i<daysInPast; i++) {
-      debugger;
+    for(let i = 0; i < daysInPast +1; i++) {
       shiftState = shift[i % shift.length];
     }
     return Promise.resolve(shiftState);

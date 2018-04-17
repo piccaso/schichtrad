@@ -22,6 +22,9 @@ export class HomePage {
   eventList: any;
   selectedEvent: any;
   isSelected: any;
+  isEarlyShift: boolean;
+  isNoonShift: boolean;
+  isLateShift: boolean;
 
 
   private _allDays: any;
@@ -43,6 +46,8 @@ export class HomePage {
   }
 
   async initShifts() {
+    this._allDays = await this.getDaysOfMonth();
+    console.log('alldaysa', this.allDays);
     let firstDayInView;
     let lastDayInView;
 
@@ -57,26 +62,30 @@ export class HomePage {
       lastDayInView = lastDayInView ? lastDayInView : new Date(this.date.getFullYear(), this.date.getMonth() +1, this.daysInThisMonth[this.daysInThisMonth.length -1]);
     }
 
-    // const daysToMonthStart = await this.shiftsService.calShift(firstDayInView);
-    // const daysToMonthEnd = await this.shiftsService.calShift(lastDayInView);
-    //
-    // console.log( 'startDate:', daysToMonthStart);
-    //
-    // console.log( 'endDate:', daysToMonthEnd);
-    // const diff = daysToMonthEnd - daysToMonthStart;
-    // console.log(diff / (1000*60*60*24));
-for(let i = 1; i<30; i++) {
+    const daysToMonthStart = await this.shiftsService.calShift(firstDayInView, this.shiftsService.shiftA);
 
-  console.log('kaiasss '+i, await this.shiftsService.calShift(new Date(2018, 3, i)));
-}
+    const daysToMonthEnd = await this.shiftsService.calShift(lastDayInView, this.shiftsService.shiftA);
+
+    console.log( 'startDate:', daysToMonthStart);
+
+    console.log( 'endDate:', daysToMonthEnd);
+    const diff = daysToMonthEnd[0] - daysToMonthStart[0];
+
+
+
+    for(let i = 0; i<diff; i++) {
+      const day =  this.allDays[i];
+
+      const shift = await this.shiftsService.calShitsPosRef(this.shiftsService.shiftA, daysToMonthStart[0] + i);
+      this.allDays[i] = {day: day, shift: shift};
+
+    }
+    // <!--[ngClass]="{'earlyShift' : isEarlyShift; 'noonShift' : isNoonShift; 'lateShift' : isLateShift}"-->
+
   }
   async ionViewWillEnter() {
     this.date = new Date();
     this.monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    this._allDays = await this.getDaysOfMonth();
-    console.log('alldaysa', this.allDays);
-
-
     this.initShifts();
     // this.loadEventThisMonth();
   }
@@ -120,12 +129,12 @@ for(let i = 1; i<30; i++) {
 
   goToLastMonth() {
     this.date = new Date(this.date.getFullYear(), this.date.getMonth(), 0);
-    this.getDaysOfMonth();
+    this.initShifts();
   }
 
   goToNextMonth() {
     this.date = new Date(this.date.getFullYear(), this.date.getMonth() + 2, 0);
-    this.getDaysOfMonth();
+    this.initShifts();
   }
 
   addEvent() {
