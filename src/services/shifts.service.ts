@@ -11,9 +11,7 @@ export class ShiftsService {
   async calShift(toDate: Date, shift: any): Promise<any> {
     const diff = this.getDaysFromDiff(toDate.getTime()) - this.getDaysFromDiff(this.beginDate.getTime());
     console.log('calulated Days form Past :', diff);
-    const shiftRes = await this.calShitsPosRef(shift, diff);
-    console.log('shift on day:', shiftRes);
-    return Promise.resolve([diff, shiftRes]);
+    return Promise.resolve([diff]);
   }
 
   getDaysFromDiff(milis: number): number {
