@@ -26,63 +26,60 @@ export class HomePage {
   isNoonShift: boolean;
   isLateShift: boolean;
 
-
   private _allDays: any;
 
   constructor(private alertCtrl: AlertController,
               public navCtrl: NavController, private shiftsService: ShiftsService,
               private calendar: Calendar) {
   }
+
   get allDays(): any {
     return this._allDays;
   }
+
+  //Links-Rechts Swipen um Monat zu wechseln
   async swipe(e) {
     if (e.direction === 2) {
-      this.goToLastMonth();
-    } else {
       this.goToNextMonth();
-
+    } else {
+      this.goToLastMonth();
     }
   }
 
   async initShifts() {
     this._allDays = await this.getDaysOfMonth();
-    console.log('alldaysa', this.allDays);
+    console.log('alldays', this.allDays);
     let firstDayInView;
     let lastDayInView;
 
-    if(this.daysInLastMonth.length !== 0) {
+    if (this.daysInLastMonth.length !== 0) {
       firstDayInView = new Date(this.date.getFullYear(), this.date.getMonth(), this.daysInLastMonth[0]);
     }
-    if(this.daysInNextMonth.length !== 0) {
-      lastDayInView = new Date(this.date.getFullYear(), this.date.getMonth() +1, this.daysInNextMonth[this.daysInNextMonth.length -1]);
+    if (this.daysInNextMonth.length !== 0) {
+      lastDayInView = new Date(this.date.getFullYear(), this.date.getMonth() + 1, this.daysInNextMonth[this.daysInNextMonth.length - 1]);
     }
-    if(this.daysInThisMonth.length !== 0) {
+    if (this.daysInThisMonth.length !== 0) {
       firstDayInView = new Date(this.date.getFullYear(), this.date.getMonth(), this.daysInThisMonth[0]);
-      lastDayInView = lastDayInView ? lastDayInView : new Date(this.date.getFullYear(), this.date.getMonth() +1, this.daysInThisMonth[this.daysInThisMonth.length -1]);
+      lastDayInView = lastDayInView ? lastDayInView : new Date(this.date.getFullYear(), this.date.getMonth() + 1, this.daysInThisMonth[this.daysInThisMonth.length - 1]);
     }
 
+    //Errechnet Zahl vom KalenderEventstart bis zur jetzigen Monatsview. (Erster Tag der View und letzter Tag der View)
+    //Und speichert dann die Differenz der beiden in "diff"
     const daysToMonthStart = await this.shiftsService.calShift(firstDayInView, this.shiftsService.shiftA);
-
     const daysToMonthEnd = await this.shiftsService.calShift(lastDayInView, this.shiftsService.shiftA);
-
-    console.log( 'startDate:', daysToMonthStart);
-
-    console.log( 'endDate:', daysToMonthEnd);
     const diff = daysToMonthEnd[0] - daysToMonthStart[0];
 
+    console.log('startDate:', daysToMonthStart);
+    console.log('endDate:', daysToMonthEnd);
 
+    for (let i = 0; i < diff; i++) {
+      const day = this.allDays[i];
 
-    for(let i = 0; i<diff; i++) {
-      const day =  this.allDays[i];
-
-      const shift = await this.shiftsService.calShitsPosRef(this.shiftsService.shiftA, daysToMonthStart[0] + i);
+      const shift = await this.shiftsService.calShiftsPosRef(this.shiftsService.shiftA, daysToMonthStart[0] + i);
       this.allDays[i] = {day: day, shift: shift};
-
     }
-    // <!--[ngClass]="{'earlyShift' : isEarlyShift; 'noonShift' : isNoonShift; 'lateShift' : isLateShift}"-->
-
   }
+
   async ionViewWillEnter() {
     this.date = new Date();
     this.monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
