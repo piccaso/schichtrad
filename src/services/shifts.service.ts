@@ -8,10 +8,10 @@ export class ShiftsService {
   constructor() {
   }
 
-  async calShift(toDate: Date, shift: any): Promise<any> {
+  async calShift(toDate: Date): Promise<any> {
     const diff = this.getDaysFromDiff(toDate.getTime()) - this.getDaysFromDiff(this.beginDate.getTime());
     console.log('calulated Days form Past :', diff);
-    return Promise.resolve([diff]);
+    return Promise.resolve(diff);
   }
 
   getDaysFromDiff(milis: number): number {

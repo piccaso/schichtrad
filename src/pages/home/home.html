@@ -32,8 +32,10 @@
       </ion-row>
       <ion-row class="calendar-date">
         <!-- <ion-col col-1 *ngFor="let lastDay of daysInLastMonth" class="last-month" (click)="goToLastMonth()">{{lastDay}}</ion-col>-->
-        <ion-col col-1 *ngFor="let day of allDays" (click)="selectDate(day)" [class.earlyShift]="day.shift === 'F'"
-                 [class.lateShift]="day.shift === 'S'" [class.nightShift]="day.shift === 'N'">
+        <ion-col col-1 *ngFor="let day of allDays" (click)="selectDate(day)"
+                 [class.earlyShift]="day.shift === 'F'"
+                 [class.lateShift]="day.shift === 'S'"
+                 [class.nightShift]="day.shift === 'N'">
           <span class="currentDate" *ngIf="currentDate === day; else otherDate">{{day}}</span>
           <ng-template #otherDate class="otherDate" >
             {{day.day}}{{day.shift}}<br>
@@ -44,19 +46,38 @@
       </ion-row>
     </ion-grid>
   </div>
-  <div class="selected-event" *ngIf="isSelected">
-    <ion-list>
-      <ion-item *ngFor="let se of selectedEvent">
-        <ion-buttons end>
-          <button ion-button clear icon-only (click)="deleteEvent(se)">
-            <ion-icon name="close"></ion-icon>
-          </button>
-        </ion-buttons>
-        <h2>{{se.title}}</h2>
-        <h3>{{se.message}}</h3>
-        <p>Start Date: {{se.startDate}}<br>
-        Start Date: {{se.endDate}}</p>
-      </ion-item>
-    </ion-list>
-  </div>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="shifts">
+      <ion-segment-button value="shiftA" isActive="true" >
+        shiftA
+      </ion-segment-button>
+      <ion-segment-button value="shiftB">
+        shiftB
+      </ion-segment-button>
+      <ion-segment-button value="shiftC">
+        shiftC
+      </ion-segment-button>
+      <ion-segment-button value="shiftD">
+        shiftD
+      </ion-segment-button>
+      <ion-segment-button value="shiftE">
+        shiftE
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  <!--<div class="selected-event" *ngIf="isSelected">-->
+    <!--<ion-list>-->
+      <!--<ion-item *ngFor="let se of selectedEvent">-->
+        <!--<ion-buttons end>-->
+          <!--<button ion-button clear icon-only (click)="deleteEvent(se)">-->
+            <!--<ion-icon name="close"></ion-icon>-->
+          <!--</button>-->
+        <!--</ion-buttons>-->
+        <!--<h2>{{se.title}}</h2>-->
+        <!--<h3>{{se.message}}</h3>-->
+        <!--<p>Start Date: {{se.startDate}}<br>-->
+        <!--Start Date: {{se.endDate}}</p>-->
+      <!--</ion-item>-->
+    <!--</ion-list>-->
+  <!--</div>-->
 </ion-content>

@@ -52,28 +52,29 @@ export class HomePage {
     let lastDayInView;
 
     if(this.daysInLastMonth.length !== 0) {
-      firstDayInView = new Date(this.date.getFullYear(), this.date.getMonth(), this.daysInLastMonth[0]);
+      firstDayInView = new Date(this.date.getFullYear(), this.date.getMonth() - 1, this.daysInLastMonth[0]);
+    } else {
+      firstDayInView = new Date(this.date.getFullYear(), this.date.getMonth(), this.daysInThisMonth[0]);
     }
     if(this.daysInNextMonth.length !== 0) {
       lastDayInView = new Date(this.date.getFullYear(), this.date.getMonth() +1, this.daysInNextMonth[this.daysInNextMonth.length -1]);
-    }
-    if(this.daysInThisMonth.length !== 0) {
-      firstDayInView = new Date(this.date.getFullYear(), this.date.getMonth(), this.daysInThisMonth[0]);
+    } else {
       lastDayInView = lastDayInView ? lastDayInView : new Date(this.date.getFullYear(), this.date.getMonth() +1, this.daysInThisMonth[this.daysInThisMonth.length -1]);
     }
 
-    const daysToMonthStart = await this.shiftsService.calShift(firstDayInView, this.shiftsService.shiftA);
 
-    const daysToMonthEnd = await this.shiftsService.calShift(lastDayInView, this.shiftsService.shiftA);
+    const daysToMonthStart = await this.shiftsService.calShift(firstDayInView);
 
-    console.log( 'startDate:', daysToMonthStart);
+    const daysToMonthEnd = await this.shiftsService.calShift(lastDayInView);
+    console.log( 'startDate:', firstDayInView, daysToMonthStart);
 
-    console.log( 'endDate:', daysToMonthEnd);
-    const diff = daysToMonthEnd[0] - daysToMonthStart[0];
+    console.log( 'endDate:', lastDayInView, daysToMonthEnd);
+    const diff = daysToMonthEnd - daysToMonthStart;
+
+    console.log( 'diff:', diff);
 
 
-
-    for(let i = 0; i<diff; i++) {
+    for(let i = 0; i <diff + 1 ; i++) {
       const day =  this.allDays[i];
 
       const shift = await this.shiftsService.calShitsPosRef(this.shiftsService.shiftA, daysToMonthStart[0] + i);
