@@ -45,7 +45,7 @@ export class CalendarDaysService {
     for(let i = 0; i<diff; i++) {
       const day =  this.allDays[i];
 
-      const shift = await this.shiftsService.calShitsPosRef(this.shiftsService.shiftA, daysToMonthStart[0] + i);
+      const shift = await this.shiftsService.calShiftsPosRef(this.shiftsService.shiftA, daysToMonthStart[0] + i);
       this.allDays[i] = {day: day, shift: shift};
 
     }
