@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, AlertController} from 'ionic-angular';
+import {AlertController, NavController} from 'ionic-angular';
 import {AddEventPage} from '../add-event/add-event';
 import {Calendar} from '@ionic-native/calendar';
 import {ShiftsService} from "../../services/shifts.service";
@@ -52,33 +52,33 @@ export class HomePage {
     let firstDayInView;
     let lastDayInView;
 
-    if(this.daysInLastMonth.length !== 0) {
+    if (this.daysInLastMonth.length !== 0) {
       firstDayInView = new Date(this.date.getFullYear(), this.date.getMonth() - 1, this.daysInLastMonth[0]);
     } else {
       firstDayInView = new Date(this.date.getFullYear(), this.date.getMonth(), this.daysInThisMonth[0]);
     }
-    if(this.daysInNextMonth.length !== 0) {
-      lastDayInView = new Date(this.date.getFullYear(), this.date.getMonth() +1, this.daysInNextMonth[this.daysInNextMonth.length -1]);
+    if (this.daysInNextMonth.length !== 0) {
+      lastDayInView = new Date(this.date.getFullYear(), this.date.getMonth() + 1, this.daysInNextMonth[this.daysInNextMonth.length - 1]);
     } else {
-      lastDayInView = lastDayInView ? lastDayInView : new Date(this.date.getFullYear(), this.date.getMonth() +1, this.daysInThisMonth[this.daysInThisMonth.length -1]);
+      lastDayInView = lastDayInView ? lastDayInView : new Date(this.date.getFullYear(), this.date.getMonth() + 1, this.daysInThisMonth[this.daysInThisMonth.length - 1]);
     }
 
 
     const daysToMonthStart = await this.shiftsService.calShift(firstDayInView);
 
     const daysToMonthEnd = await this.shiftsService.calShift(lastDayInView);
-    console.log( 'startDate:', firstDayInView, daysToMonthStart);
+    console.log('startDate:', firstDayInView, daysToMonthStart);
 
-    console.log( 'endDate:', lastDayInView, daysToMonthEnd);
+    console.log('endDate:', lastDayInView, daysToMonthEnd);
     const diff = daysToMonthEnd - daysToMonthStart;
 
-    console.log( 'diff:', diff);
+    console.log('diff:', diff);
 
 
-    for(let i = 0; i <diff + 1 ; i++) {
-      const day =  this.allDays[i];
+    for (let i = 0; i < diff + 1; i++) {
+      const day = this.allDays[i];
 
-        const shift = await this.shiftsService.calShiftsPosRef(selectedShift, daysToMonthStart + i);
+      const shift = await this.shiftsService.calShiftsPosRef(selectedShift, daysToMonthStart + i);
       this._allDays[i] = {day: day, shift: shift};
     }
   }
@@ -87,6 +87,7 @@ export class HomePage {
     console.log(e);
     this.initShifts(this.shiftsService.shifts[e.value]);
   }
+
   async ionViewWillEnter() {
     console.log(this.shiftsService.shifts);
     this.date = new Date();
