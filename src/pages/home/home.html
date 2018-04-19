@@ -39,7 +39,7 @@
         <ion-col col-1 *ngFor="let day of allDays" (click)="selectDate(day)">
           <span class="currentDate" *ngIf="currentDate === day; else otherDate">{{day}}</span>
           <ng-template #otherDate class="otherDate">
-            {{day.day}}{{day.shift}}<br>
+            {{day.day}}<br>
             <ion-icon class="nightShift" name="star" *ngIf="day.shift === 'N'"></ion-icon>
             <ion-icon class="lateShift" name="star-half" *ngIf="day.shift === 'S'"></ion-icon>
             <ion-icon class="earlyShift" name="star-outline" *ngIf="day.shift === 'F'"></ion-icon>
@@ -50,7 +50,7 @@
     </ion-grid>
   </div>
   <ion-toolbar>
-    <ion-segment [(ngModel)]="shifts">
+    <ion-segment [(ngModel)]="shifts" (ionChange)="shiftsChange($event)">
       <ion-segment-button value="shiftA" isActive="true" >
         shiftA
       </ion-segment-button>

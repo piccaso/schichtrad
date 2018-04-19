@@ -46,7 +46,7 @@ export class HomePage {
     }
   }
 
-  async initShifts() {
+  async initShifts(selectedShift: any) {
     this._allDays = await this.getDaysOfMonth();
     console.log('alldays', this.allDays);
     let firstDayInView;
@@ -78,15 +78,21 @@ export class HomePage {
     for(let i = 0; i <diff + 1 ; i++) {
       const day =  this.allDays[i];
 
-        const shift = await this.shiftsService.calShiftsPosRef(this.shiftsService.shiftA, daysToMonthStart + i);
-      this.allDays[i] = {day: day, shift: shift};
+        const shift = await this.shiftsService.calShiftsPosRef(selectedShift, daysToMonthStart + i);
+      this._allDays[i] = {day: day, shift: shift};
     }
   }
 
+  public shiftsChange(e: any): void {
+    console.log(e);
+    this.initShifts(this.shiftsService.shifts[e.value]);
+  }
   async ionViewWillEnter() {
+    console.log(this.shiftsService.shifts);
     this.date = new Date();
     this.monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    this.initShifts();
+    console.log('test', this.shiftsService);
+    this.initShifts(this.shiftsService.shifts.shiftA);
     // this.loadEventThisMonth();
   }
 
@@ -129,12 +135,12 @@ export class HomePage {
 
   goToLastMonth() {
     this.date = new Date(this.date.getFullYear(), this.date.getMonth(), 0);
-    this.initShifts();
+    this.initShifts(this.shiftsService.shifts.shiftA);
   }
 
   goToNextMonth() {
     this.date = new Date(this.date.getFullYear(), this.date.getMonth() + 2, 0);
-    this.initShifts();
+    this.initShifts(this.shiftsService.shifts.shiftA);
   }
 
   addEvent() {
