@@ -26,28 +26,29 @@ export class HomePage {
   isNoonShift: boolean;
   isLateShift: boolean;
 
-
   private _allDays: any;
 
   constructor(private alertCtrl: AlertController,
               public navCtrl: NavController, private shiftsService: ShiftsService,
               private calendar: Calendar) {
   }
+
   get allDays(): any {
     return this._allDays;
   }
+
+  //Links-Rechts Swipen um Monat zu wechseln
   async swipe(e) {
     if (e.direction === 2) {
-      this.goToLastMonth();
-    } else {
       this.goToNextMonth();
-
+    } else {
+      this.goToLastMonth();
     }
   }
 
   async initShifts() {
     this._allDays = await this.getDaysOfMonth();
-    console.log('alldaysa', this.allDays);
+    console.log('alldays', this.allDays);
     let firstDayInView;
     let lastDayInView;
 
@@ -77,13 +78,11 @@ export class HomePage {
     for(let i = 0; i <diff + 1 ; i++) {
       const day =  this.allDays[i];
 
-      const shift = await this.shiftsService.calShitsPosRef(this.shiftsService.shiftA, daysToMonthStart[0] + i);
+      const shift = await this.shiftsService.calShiftsPosRef(this.shiftsService.shiftA, daysToMonthStart[0] + i);
       this.allDays[i] = {day: day, shift: shift};
-
     }
-    // <!--[ngClass]="{'earlyShift' : isEarlyShift; 'noonShift' : isNoonShift; 'lateShift' : isLateShift}"-->
-
   }
+
   async ionViewWillEnter() {
     this.date = new Date();
     this.monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
