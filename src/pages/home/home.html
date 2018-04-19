@@ -43,7 +43,9 @@
           <span class="currentDate" *ngIf="currentDate === day; else otherDate">{{day}}</span>
           <ng-template #otherDate class="otherDate">
             {{day.day}}{{day.shift}}<br>
-            <div class="event-bullet" *ngIf="checkEvent(day)"></div>
+            <ion-icon name="star" *ngIf="day.shift === 'N'"></ion-icon>
+            <ion-icon name="star-half" *ngIf="day.shift === 'S'"></ion-icon>
+            <ion-icon name="star-outline" *ngIf="day.shift === 'F'"></ion-icon>
           </ng-template>
         </ion-col>
         <!--<ion-col col-1 *ngFor="let nextDay of daysInNextMonth" class="next-month" (click)="goToNextMonth()">{{nextDay}}</ion-col>-->

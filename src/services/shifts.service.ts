@@ -23,7 +23,7 @@ export class ShiftsService {
   calShiftsPosRef(shift, daysInPast): Promise<string> {
     let shiftState;
 
-    for (let i = 0; i < daysInPast; i++) {
+    for (let i = 0; i < daysInPast +1; i++) {
       shiftState = shift[i % shift.length];
     }
     return Promise.resolve(shiftState);
