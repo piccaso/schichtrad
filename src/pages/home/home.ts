@@ -78,7 +78,7 @@ export class HomePage {
     for(let i = 0; i <diff + 1 ; i++) {
       const day =  this.allDays[i];
 
-      const shift = await this.shiftsService.calShiftsPosRef(this.shiftsService.shiftA, daysToMonthStart[0] + i);
+      const shift = await this.shiftsService.calShiftsPosRef(this.shiftsService.shiftA, daysToMonthStart + i);
       this.allDays[i] = {day: day, shift: shift};
     }
   }
