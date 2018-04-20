@@ -1,11 +1,95 @@
 {
+  "extends": [
+    "tslint:recommended"
+  ],
   "rules": {
-    "no-duplicate-variable": true,
-    "no-unused-variable": [
-      true
-    ]
-  },
-  "rulesDirectory": [
-    "node_modules/tslint-eslint-rules/dist/rules"
-  ]
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-separator",
+      "check-type"
+    ],
+    "trailing-comma": [
+      false,
+      {
+        "multiline": "always",
+        "singleline": "never"
+      }
+    ],
+    "member-access": false,
+    "no-input-rename": false,
+    "no-console": [
+      false,
+      "debug",
+      "info",
+      "time",
+      "timeEnd",
+      "trace",
+      "log",
+      "error"
+    ],
+    "no-string-literal": false,
+    "no-use-before-declare": true,
+    "object-literal-sort-keys": false,
+    "ordered-imports": false,
+    "quotemark": [
+      true,
+      "single",
+      "avoid-escape"
+    ],
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-leading-underscore"
+    ],
+    "arrow-parens": [
+      true,
+      "ban-single-arg-parens"
+    ],
+    "interface-name": [
+      true,
+      "never-prefix"
+    ],
+    "only-arrow-functions": false,
+    "no-consecutive-blank-lines": [
+      true,
+      2
+    ],
+    "semicolon": [
+      true,
+      "always"
+    ],
+    "max-classes-per-file": [
+      false
+    ],
+    "radix": false,
+    "space-before-function-paren": [
+      false
+    ],
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "instance-field",
+          "constructor"
+        ]
+      }
+    ],
+    "object-literal-shorthand": false,
+    "no-console": [
+      true,
+      "debug",
+      "info",
+      "time",
+      "timeEnd",
+      "trace",
+      "log",
+      "error"
+    ],
+    "eofline": false,
+    "no-use-before-declare": false
+  }
 }
