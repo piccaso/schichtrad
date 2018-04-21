@@ -7,6 +7,9 @@ page-home {
     width: 14.285714285714286%;
     max-width: 14.285714285714286%;
   }
+  .addEventButton {
+    color: #2ec95c;
+  }
   .col {
     text-align: center;
     padding: 5px;
@@ -25,8 +28,12 @@ page-home {
     border-radius: 30px;
   }
   .calendar-header {
-    background-color: #1a732d;
+    background-color: #003569;
     color: #FFFFFF;
+    font-size: 20px;
+    border-radius: 5px;
+    border-bottom: 0 none;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
   }
   .event-bullet {
     margin: 2px auto;
@@ -44,36 +51,61 @@ page-home {
     border: none;
   }
   .calendar-body {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+
     .grid {
-      padding: 0;
+    }
+    .col{
     }
     .col:last-child {
       border-right: none;
     }
     .calendar-weekday, .calendar-date {
+      font-size: 17px;
       text-align: center;
       margin: 0;
+      border-radius: 3px;
+      .col{
+
+      }
     }
     .calendar-weekday {
       font-weight: bold;
-      border-bottom: solid 1px #1a732d;
-      background-color: #26ab56;
+      background-color: #3abf4c;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
     }
     .calendar-date {
-      border-top: solid 1px #1a732d;
-      border-bottom: solid 1px #1a732d;
+      font-size: 15px;
     }
   }
 }
 
 .earlyShift {
-  color: red;
+  color: #ff9600;
 }
 
 .lateShift {
-  color: #007aff;
+  color: #ff1900;
 }
 
 .nightShift {
-  color: #1a732d;
+  color: #0061ff;
 }
+
+.segment {
+  border-radius: 3px;
+  background-color: #ffffff;
+  border-bottom: 0 none;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+
+  .segment-button {
+    //border: solid 1px #3a3d3e;
+    font-size: 20px;
+  }
+}
+
+
+

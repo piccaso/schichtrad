@@ -91,10 +91,10 @@ export class HomePage {
   async ionViewWillEnter() {
     console.log(this.shiftsService.shifts);
     this.date = new Date();
-    this.monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    this.monthNames = ["Jänner", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
     console.log('test', this.shiftsService);
     this.initShifts(this.shiftsService.shifts.shiftA);
-    // this.loadEventThisMonth();
+    this.loadEventThisMonth();
   }
 
   getDaysOfMonth(): Promise<any> {

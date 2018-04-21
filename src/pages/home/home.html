@@ -1,11 +1,11 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      My Calendar App
+      SchichtRadl
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="addEvent()">
-        <ion-icon name="add-circle"></ion-icon>
+        <ion-icon class="addEventButton" name="add-circle"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -26,11 +26,11 @@
   <div class="calendar-body" (swipe)="swipe($event)">
     <ion-grid>
       <ion-row class="calendar-weekday">
-        <ion-col>Su</ion-col>
+        <ion-col>So</ion-col>
         <ion-col>Mo</ion-col>
-        <ion-col>Tu</ion-col>
-        <ion-col>We</ion-col>
-        <ion-col>Th</ion-col>
+        <ion-col>Di</ion-col>
+        <ion-col>Mi</ion-col>
+        <ion-col>Do</ion-col>
         <ion-col>Fr</ion-col>
         <ion-col>Sa</ion-col>
       </ion-row>
@@ -40,47 +40,48 @@
           <span class="currentDate" *ngIf="currentDate === day; else otherDate">{{day}}</span>
           <ng-template #otherDate class="otherDate">
             {{day.day}}<br>
-            <ion-icon class="nightShift" name="star" *ngIf="day.shift === 'N'"></ion-icon>
-            <ion-icon class="lateShift" name="star-half" *ngIf="day.shift === 'S'"></ion-icon>
-            <ion-icon class="earlyShift" name="star-outline" *ngIf="day.shift === 'F'"></ion-icon>
+            <ion-icon class="nightShift" name="cloudy-night" *ngIf="day.shift === 'N'"></ion-icon>
+            <ion-icon class="lateShift" name="sunny" *ngIf="day.shift === 'S'"></ion-icon>
+            <ion-icon class="earlyShift" name="partly-sunny" *ngIf="day.shift === 'F'"></ion-icon>
           </ng-template>
         </ion-col>
         <!--<ion-col col-1 *ngFor="let nextDay of daysInNextMonth" class="next-month" (click)="goToNextMonth()">{{nextDay}}</ion-col>-->
       </ion-row>
     </ion-grid>
   </div>
-  <ion-toolbar>
-    <ion-segment [(ngModel)]="shifts" (ionChange)="shiftsChange($event)">
-      <ion-segment-button value="shiftA" isActive="true" >
-        shiftA
-      </ion-segment-button>
-      <ion-segment-button value="shiftB">
-        shiftB
-      </ion-segment-button>
-      <ion-segment-button value="shiftC">
-        shiftC
-      </ion-segment-button>
-      <ion-segment-button value="shiftD">
-        shiftD
-      </ion-segment-button>
-      <ion-segment-button value="shiftE">
-        shiftE
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
-  <!--<div class="selected-event" *ngIf="isSelected">-->
-    <!--<ion-list>-->
-      <!--<ion-item *ngFor="let se of selectedEvent">-->
-        <!--<ion-buttons end>-->
-          <!--<button ion-button clear icon-only (click)="deleteEvent(se)">-->
-            <!--<ion-icon name="close"></ion-icon>-->
-          <!--</button>-->
-        <!--</ion-buttons>-->
-        <!--<h2>{{se.title}}</h2>-->
-        <!--<h3>{{se.message}}</h3>-->
-        <!--<p>Start Date: {{se.startDate}}<br>-->
-        <!--Start Date: {{se.endDate}}</p>-->
-      <!--</ion-item>-->
-    <!--</ion-list>-->
-  <!--</div>-->
+  <ion-segment [(ngModel)]="shifts" (ionChange)="shiftsChange($event)">
+    <ion-segment-button value="shiftA" isActive="true">
+      A
+    </ion-segment-button>
+    <ion-segment-button value="shiftB">
+      B
+    </ion-segment-button>
+    <ion-segment-button value="shiftC">
+      C
+    </ion-segment-button>
+    <ion-segment-button value="shiftD">
+      D
+    </ion-segment-button>
+    <ion-segment-button value="shiftE">
+      E
+    </ion-segment-button>
+  </ion-segment>
+
+  <div class="selected-event" *ngIf="isSelected">
+    <ion-list>
+      <ion-item *ngFor="let se of selectedEvent">
+        <ion-buttons end>
+          <button ion-button clear icon-only (click)="deleteEvent(se)">
+            <ion-icon name="close"></ion-icon>
+          </button>
+        </ion-buttons>
+        <h2>{{se.title}}</h2>
+        <h3>{{se.message}}</h3>
+        <p>Start Date: {{se.startDate}}<br>
+          Start Date: {{se.endDate}}</p>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
+
+
