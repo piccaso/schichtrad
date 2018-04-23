@@ -14,13 +14,9 @@ export class HomePage {
   daysInThisMonth = this.calService.daysInThisMonth;
   daysInLastMonth = this.calService.daysInLastMonth;
   daysInNextMonth = this.calService.daysInNextMonth;
-  currentMonth: any;
-  currentYear: any;
-  currentDate: any;
   eventList: any;
   selectedEvent: any;
   isSelected: any;
-  const
   diff = 41;
   private _allDays: any;
 
