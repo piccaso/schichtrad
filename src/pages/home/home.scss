@@ -102,9 +102,13 @@ page-home {
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
 
   .segment-button {
-    //border: solid 1px #3a3d3e;
+    border: solid 1px #3a3d3e;
     font-size: 20px;
   }
+}
+.wrapper {
+  height: 15px;
+  width: 15px;
 }
 
 

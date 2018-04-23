@@ -4,6 +4,7 @@ import {AddEventPage} from '../add-event/add-event';
 import {Calendar} from '@ionic-native/calendar';
 import {ShiftsService} from '../../services/shifts.service';
 import {CalendarService} from '../../services/calendar.service';
+import {EventsService} from '../../services/events.service';
 
 @Component({
   selector: 'page-home',
@@ -14,6 +15,9 @@ export class HomePage {
   daysInThisMonth = this.calService.daysInThisMonth;
   daysInLastMonth = this.calService.daysInLastMonth;
   daysInNextMonth = this.calService.daysInNextMonth;
+  currentMonth = this.calService.currentMonth;
+  currentYear = this.calService.currentYear;
+  currentDate = this.calService.currentDate;
   eventList: any;
   selectedEvent: any;
   isSelected: any;
@@ -23,6 +27,7 @@ export class HomePage {
   constructor(private alertCtrl: AlertController,
               public navCtrl: NavController, private shiftsService: ShiftsService,
               private calService: CalendarService,
+              private eventsService: EventsService,
               private calendar: Calendar) {
   }
 
@@ -47,13 +52,19 @@ export class HomePage {
   async initShifts(selectedShift: any, date: Date = this.calService.date) {
     // this.date = date;
     this._allDays = await this.calService.getDaysOfMonth();
-    console.log('alldays', this.allDays);
+    this.currentMonth = this.calService.currentMonth;
+    this.currentYear = this.calService.currentYear;
+    this.currentDate = this.calService.currentDate;
     const daysToMonthStart = await this.shiftsService.calShift(this.calService.getFirstDay());
 
-    for (let i = 0; i < this.diff + 1; i++) {
+    for (let i = 0; i < this.diff; i++) {
       const day = this.allDays[i];
       const shift = await this.shiftsService.calShiftsPosRef(selectedShift, daysToMonthStart + i);
-      this._allDays[i] = {day: day, shift: shift};
+      const myEvents = await this.eventsService.getEventsByDay(day.day,
+        day.month,
+        day.year);
+      console.log(myEvents);
+      this._allDays[i] = {day: day.day, shift: shift, myEvents: myEvents};
     }
   }
 

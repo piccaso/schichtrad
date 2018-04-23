@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
-import {Calendar} from '@ionic-native/calendar';
+import {EventsService} from '../../services/events.service';
+import {CalEvent} from '../../model/calEvent';
 
 @IonicPage()
 @Component({
@@ -8,41 +9,35 @@ import {Calendar} from '@ionic-native/calendar';
   templateUrl: 'add-event.html',
 })
 export class AddEventPage {
-
-  event = {title: '', location: '', message: '', startDate: '', endDate: ''};
+  index = 0;
+  event = {title: 'patkaiss',
+    location: 'kos',
+    message: 'test',
+    startDate: new Date().toISOString(),
+    endDate: new Date(new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate() + 2).toISOString()};
 
   constructor(public alertCtrl: AlertController,
               public navCtrl: NavController,
               public navParams: NavParams,
-              private calendar: Calendar) {
+              private eventsService: EventsService) {
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddEventPage');
   }
 
-  save() {
-    this.calendar.createEvent(this.event.title,
-      this.event.location, this.event.message,
+  async save() {
+    const thisEvent: CalEvent = new CalEvent(
+      this.event.title + this.index,
       new Date(this.event.startDate),
-      new Date(this.event.endDate))
-      .then(msg => {
-          const alert = this.alertCtrl.create({
-            title: 'Success!',
-            subTitle: 'Event saved successfully',
-            buttons: ['OK']
-          });
-          alert.present();
-          this.navCtrl.pop();
-        }, err => {
-          const alert = this.alertCtrl.create({
-            title: 'Failed!',
-            subTitle: err,
-            buttons: ['OK']
-          });
-          alert.present();
-        }
-      );
+      new Date(this.event.endDate),
+      this.event.message,
+      'red');
+    this.index += 1;
+    console.log('result of add: ', await this.eventsService.addEvent(thisEvent));
   }
 
 }

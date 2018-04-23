@@ -10,6 +10,7 @@ import { AddEventPage } from '../pages/add-event/add-event';
 import { EditEventPage } from '../pages/edit-event/edit-event';
 import {ShiftsService} from '../services/shifts.service';
 import {CalendarService} from '../services/calendar.service';
+import {EventsService} from '../services/events.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {CalendarService} from '../services/calendar.service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Calendar,
     ShiftsService,
-    CalendarService
+    CalendarService,
+    EventsService
   ]
 })
 export class AppModule {}
