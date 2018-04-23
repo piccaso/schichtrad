@@ -27,7 +27,7 @@
       "time",
       "timeEnd",
       "trace",
-      "log",
+      "log1",
       "error"
     ],
     "no-string-literal": false,
@@ -86,7 +86,7 @@
       "time",
       "timeEnd",
       "trace",
-      "log",
+      "log1",
       "error"
     ],
     "eofline": false,

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class ShiftsService {
-  //Events Starttag
+  // Events Starttag
   private beginDate: Date = new Date(2016, 0, 11);
   private shiftPosition: number = 0;
 
