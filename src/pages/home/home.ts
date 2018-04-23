@@ -20,7 +20,8 @@ export class HomePage {
   eventList: any;
   selectedEvent: any;
   isSelected: any;
-
+  const
+  diff = 41;
   private _allDays: any;
 
   constructor(private alertCtrl: AlertController,
@@ -52,11 +53,8 @@ export class HomePage {
     this._allDays = await this.calService.getDaysOfMonth();
     console.log('alldays', this.allDays);
     const daysToMonthStart = await this.shiftsService.calShift(this.calService.getFirstDay());
-    const daysToMonthEnd = await this.shiftsService.calShift(this.calService.getLastDay());
 
-    const diff = daysToMonthEnd - daysToMonthStart;
-
-    for (let i = 0; i < diff + 1; i++) {
+    for (let i = 0; i < this.diff + 1; i++) {
       const day = this.allDays[i];
       const shift = await this.shiftsService.calShiftsPosRef(selectedShift, daysToMonthStart + i);
       this._allDays[i] = {day: day, shift: shift};
