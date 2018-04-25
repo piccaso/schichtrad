@@ -95,15 +95,38 @@ page-home {
   color: #0061ff;
 }
 
-.segment {
-  border-radius: 3px;
-  background-color: #ffffff;
-  border-bottom: 0 none;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+.segment{
+  padding-top:10px;
+  font-size: 20px;
 
-  .segment-button {
-    border: solid 1px #3a3d3e;
-    font-size: 20px;
+  ion-segment-button.segment{
+    //max-width: 25px;
+    border-style: solid;
+    border-color: #3abf4c;
+    // color: #e62100;
+    border-width: thin;
+  }
+
+  ion-segment-button.segment-button:first-of-type {
+    font-size:20px;
+    border-radius: 90px 90px 90px 90px;
+    margin-right: 0px;
+    margin-left: 0px;
+    line-height: 3.4rem;
+    height: 100%;
+    width: 100%}
+    ion-segment-button.segment-button:not(:first-of-type) {
+    font-size:20px;
+    border-radius: 90px 90px 90px 90px;
+    margin-right: 0px;
+    margin-left: 20px;
+    line-height: 3.4rem;
+    height: 100%;
+    width: 100%;}
+
+  ion-segment-button.segment-button.segment-activated{
+    background-color: #09ff00;
+    color: #ffffff;
   }
 }
 .wrapper {
