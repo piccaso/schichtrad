@@ -84,49 +84,46 @@ page-home {
 }
 
 .earlyShift {
-  color: #ff9600;
+  color: #ff5829;
 }
 
 .lateShift {
-  color: #ff1900;
+  color: #ffe423;
 }
 
 .nightShift {
   color: #0061ff;
 }
 
-.segment{
-  padding-top:10px;
-  font-size: 20px;
+.segment {
+  padding-top: 10px;
 
-  ion-segment-button.segment{
-    //max-width: 25px;
-    border-style: solid;
-    border-color: #3abf4c;
-    // color: #e62100;
-    border-width: thin;
+  //ion-segment-button.segment {
+  //}
+  //ion-segment-button.segment-button:first-of-type {
+  // }
+  //  ion-segment-button.segment-button:not(:first-of-type) {
+  // }
+
+  ion-segment-button.segment-button {
+    border-radius: 90px 90px 90px 90px;
+    margin-right: 5px;
+    margin-left: 5px;
+    line-height: 3.4rem;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+    background: #84b1ca;
+    color: #fff;
+    font-family: Sans-serif;
+    font-size: 20px;
+    text-align: center;
+    border: 0;
+    transition: all 0.3s ease 0s;
   }
 
-  ion-segment-button.segment-button:first-of-type {
-    font-size:20px;
-    border-radius: 90px 90px 90px 90px;
-    margin-right: 0px;
-    margin-left: 0px;
-    line-height: 3.4rem;
-    height: 100%;
-    width: 100%}
-    ion-segment-button.segment-button:not(:first-of-type) {
-    font-size:20px;
-    border-radius: 90px 90px 90px 90px;
-    margin-right: 0px;
-    margin-left: 20px;
-    line-height: 3.4rem;
-    height: 100%;
-    width: 100%;}
-
   ion-segment-button.segment-button.segment-activated{
-    background-color: #09ff00;
-    color: #ffffff;
+    background: #3abf4c;
   }
 }
 .wrapper {
