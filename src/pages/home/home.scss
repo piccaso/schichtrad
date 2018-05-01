@@ -1,4 +1,7 @@
 page-home {
+  .page{
+    background-color: #f3f5f6;
+  }
   [col-1] {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 8.33333%;
@@ -6,6 +9,7 @@ page-home {
     flex: 0 0 14.285714285714286%;
     width: 14.285714285714286%;
     max-width: 14.285714285714286%;
+    //background-color: white;
   }
   .addEventButton {
     color: #2ec95c;
@@ -57,6 +61,9 @@ page-home {
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
 
     .grid {
+      background-color:white;
+      border-radius: 5px;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
     }
     .col{
     }
@@ -106,14 +113,14 @@ page-home {
   // }
 
   ion-segment-button.segment-button {
-    border-radius: 90px 90px 90px 90px;
+    border-radius: 5px;
     margin-right: 5px;
     margin-left: 5px;
     line-height: 3.4rem;
     height: 100%;
     width: 100%;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
-    background: #84b1ca;
+    background: #003569;
     color: #fff;
     font-family: Sans-serif;
     font-size: 20px;
