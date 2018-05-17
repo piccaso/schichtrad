@@ -5,6 +5,7 @@ import {Calendar} from '@ionic-native/calendar';
 import {ShiftsService} from '../../services/shifts.service';
 import {CalendarService} from '../../services/calendar.service';
 import {EventsService} from '../../services/events.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-home',
@@ -22,18 +23,39 @@ export class HomePage {
   selectedEvent: any;
   isSelected: any;
   diff = 41;
+  shifts: any;
   private _allDays: any;
 
   constructor(private alertCtrl: AlertController,
               public navCtrl: NavController, private shiftsService: ShiftsService,
               private calService: CalendarService,
               private eventsService: EventsService,
-              private calendar: Calendar) {
+              private calendar: Calendar,
+              private storage: Storage) {
+
+
+                this.storage.ready().then(() => {
+                  this.storage.get("shift").then((value) => {
+            
+                    if(value != null){
+
+                      
+                      this.initShifts(this.shiftsService.shifts[value]);
+                      this.shifts = value;
+                    }
+                    
+                  });
+                });
   }
 
   async ionViewWillEnter() {
     this.initShifts(this.shiftsService.shifts.shiftA);
     this.loadEventThisMonth();
+
+
+    
+
+
   }
 
   get allDays(): any {
@@ -70,6 +92,7 @@ export class HomePage {
 
   public shiftsChange(e: any): void {
     this.initShifts(this.shiftsService.shifts[e.value]);
+    this.storage.set("shift", e.value);
   }
 
   goToLastMonth() {
@@ -91,6 +114,8 @@ export class HomePage {
   addEvent() {
     this.navCtrl.push(AddEventPage);
   }
+
+
 
   loadEventThisMonth() {
     this.eventList = new Array();
@@ -167,5 +192,7 @@ export class HomePage {
     });
     alert.present();
   }
+
+
 
 }

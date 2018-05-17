@@ -11,6 +11,7 @@ import { EditEventPage } from '../pages/edit-event/edit-event';
 import {ShiftsService} from '../services/shifts.service';
 import {CalendarService} from '../services/calendar.service';
 import {EventsService} from '../services/events.service';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {EventsService} from '../services/events.service';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
