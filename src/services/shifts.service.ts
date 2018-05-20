@@ -16,13 +16,8 @@ export class ShiftsService {
     return Math.round(milis / (1000 * 60 * 60 * 24));
   }
 
-  calShiftsPosRef(shift, daysInPast): Promise<string> {
-    let shiftState;
-
-    for (let i = 0; i < daysInPast + 1; i++) {
-      shiftState = shift[i % shift.length];
-    }
-    return Promise.resolve(shiftState);
+  calShiftsPosRef(shift: string[], daysInPast: number): Promise<string> {
+    return Promise.resolve(shift[daysInPast % shift.length]);
   }
 
   public shifts = {
